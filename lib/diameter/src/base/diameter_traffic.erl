@@ -1979,6 +1979,14 @@ get_avp(_, Name, [_MsgName | Avps]) ->
             undefined
     end;
 
+get_avp(_, Name, #diameter_packet{msg = [_MsgName | Avps]}) ->
+    case find(Name, Avps) of
+        {_, V} ->
+            #diameter_avp{name = Name, value = value(Name, V)};
+        _ ->
+            undefined
+    end;
+
 %% ... or record.
 get_avp(Dict, Name, Rec) ->
     try Dict:'#get-'(Name, Rec) of
