@@ -1979,6 +1979,7 @@ get_avp(_, Name, [_MsgName | Avps]) ->
             undefined
     end;
 
+%% ... or record.
 get_avp(_, Name, #diameter_packet{msg = [_MsgName | Avps]}) ->
     case find(Name, Avps) of
         {_, V} ->
@@ -1987,7 +1988,6 @@ get_avp(_, Name, #diameter_packet{msg = [_MsgName | Avps]}) ->
             undefined
     end;
 
-%% ... or record.
 get_avp(Dict, Name, Rec) ->
     try Dict:'#get-'(Name, Rec) of
         V ->
