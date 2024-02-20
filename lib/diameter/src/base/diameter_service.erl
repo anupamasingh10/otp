@@ -1690,8 +1690,6 @@ fltr_all(Alias, RH, [{realm, OR}, {host, OH} | Filters], T, true) ->
     {PeerT, _AppT, IdentT} = T,
     try {iolist_to_binary(OR), iolist_to_binary(OH)} of
         BT ->
-		    io:format(user, "Anu: IdentT: ~p~n", [ets:tab2list(IdentT)]),
-		    io:format(user, "Anu: PeerT: ~p~n", [ets:tab2list(PeerT)]),
             Peers = caps(PeerT,
                          ets:select(IdentT, [{{BT, '$1', '$2'},
                                               [{'==', '$1', {const, Alias}}],
